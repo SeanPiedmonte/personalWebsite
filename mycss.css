@@ -33,6 +33,7 @@ body {
 .banner-text {
   text-align: center;
   position: relative;
+  color: white;
 }
 
 p {

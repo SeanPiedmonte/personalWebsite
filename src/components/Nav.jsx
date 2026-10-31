@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router'
 
 const links = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { to: '/#about', label: 'About' },
+  { to: '/#experience', label: 'Experience' },
+  { to: '/#projects', label: 'Projects' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/#contact', label: 'Contact' },
 ]
 
 export default function Nav() {
+  const { pathname } = useLocation()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -18,9 +21,12 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Only the home page has a hero image behind the nav.
+  const solid = scrolled || pathname !== '/'
+
   return (
-    <header className={`nav ${scrolled ? 'nav--solid' : ''}`}>
-      <a href="#top" className="nav__brand">SP</a>
+    <header className={`nav ${solid ? 'nav--solid' : ''}`}>
+      <Link to="/" className="nav__brand">SP</Link>
       <button
         className="nav__toggle"
         aria-label="Toggle menu"
@@ -31,9 +37,14 @@ export default function Nav() {
       </button>
       <nav className={`nav__links ${open ? 'nav__links--open' : ''}`}>
         {links.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+          <Link
+            key={l.to}
+            to={l.to}
+            onClick={() => setOpen(false)}
+            className={pathname.startsWith('/blog') && l.to === '/blog' ? 'active' : undefined}
+          >
             {l.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </header>

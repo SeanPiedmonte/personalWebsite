@@ -14,6 +14,20 @@ npm run dev
 All text, projects, experience and links live in [`src/data.js`](src/data.js).
 Put a `resume.pdf` in `public/` to enable the résumé download.
 
+## Write a blog post
+
+Add a Markdown file to `src/posts/` named `YYYY-MM-DD-slug.md` (the slug becomes `/blog/slug`), starting with:
+
+```md
+---
+title: My essay
+date: 2026-11-05
+summary: One sentence for the blog index.
+---
+```
+
+Then write the post in Markdown below it. Posts are listed newest first.
+
 ## Deploy
 
 Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist/` to GitHub Pages.

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "new-post": "node scripts/new-post.js"
   },
   "dependencies": {
     "marked": "^16.4.2",
